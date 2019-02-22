@@ -1,6 +1,15 @@
 (ns twenty48.core
   (:gen-class))
 
+(def remove-zeros (partial remove zero?))
+
+(def partition-by-identity (partial partition-by identity))
+
+(def partition-in-group-of-2 
+  (comp
+   (partial mapcat (partial partition-all 2))
+   (partial partition-by-identity)))
+
 (defn move-grid-right
   "Moves an entire grid to the right"
   [grid]
