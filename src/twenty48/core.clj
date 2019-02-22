@@ -12,18 +12,20 @@
 
 (def add-similar-group (partial map (partial apply +)))
 
-(def move-grid (comp 
+(def move-a-grid-to-right (comp 
                 (partial take-last 4)
                 (partial concat (repeat 4 0))
+                (partial reverse)
                 (partial add-similar-group)
                 (partial partition-in-group-of-2)
+                (partial reverse)
                 (partial remove-zeros)))
 
 (def convert-columns-to-rows (partial apply mapv vector))
 
 (def move-grid-right
   "Moves an entire grid to the right"
-  (partial map move-grid))
+  (partial map move-a-grid-to-right))
 
 (def move-grid-left
   "Moves an entire grid to the left"
