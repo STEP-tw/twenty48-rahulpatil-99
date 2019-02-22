@@ -10,10 +10,18 @@
    (partial mapcat (partial partition-all 2))
    (partial partition-by-identity)))
 
-(defn move-grid-right
+(def add-similar-group (partial map (partial apply +)))
+
+(def move-grid (comp 
+                (partial take-last 4)
+                (partial concat (repeat 4 0))
+                (partial add-similar-group)
+                (partial partition-in-group-of-2)
+                (partial remove-zeros)))
+
+(def move-grid-right
   "Moves an entire grid to the right"
-  [grid]
-  grid)
+  (partial map move-grid))
 
 (defn move-grid-left
   "Moves an entire grid to the left"
