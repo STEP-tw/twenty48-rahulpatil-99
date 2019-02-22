@@ -19,6 +19,8 @@
                 (partial partition-in-group-of-2)
                 (partial remove-zeros)))
 
+(def convert-columns-to-rows (partial apply mapv vector))
+
 (def move-grid-right
   "Moves an entire grid to the right"
   (partial map move-grid))
@@ -30,10 +32,12 @@
    (partial move-grid-right)
    (partial map reverse)))
 
-(defn move-grid-down
+(def move-grid-down
   "Moves an entire grid down"
-  [grid]
-  grid)
+  (comp
+   (partial convert-columns-to-rows)
+   (partial move-grid-right)
+   (partial convert-columns-to-rows)))
 
 (defn move-grid-up
   "Moves an entire grid up"
