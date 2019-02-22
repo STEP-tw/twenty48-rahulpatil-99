@@ -39,7 +39,9 @@
    (partial move-grid-right)
    (partial convert-columns-to-rows)))
 
-(defn move-grid-up
+(def move-grid-up
   "Moves an entire grid up"
-  [grid]
-  grid)
+  (comp 
+   (partial convert-columns-to-rows)
+   (partial move-grid-left)
+   (partial convert-columns-to-rows)))
